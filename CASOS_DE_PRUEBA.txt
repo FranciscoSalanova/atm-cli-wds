@@ -1,0 +1,9 @@
+1. consulta de cuenta existente
+2. consulta de cuenta inexistente
+3. creación de cuenta luego de consultar cuenta inexistente
+4. respuesta con menú de operaciones para una cuenta existente
+5. realizar una depósito en una cuenta existente
+6. realizar una extracción en una cuenta existente
+7. validar que la cuenta tenga fondos antes de realizar una extracción
+8. contestar que no hay fondos suficientes en caso de que el monto a extraer sea superior al monto disponible en la cuenta
+9. salir del programa en caso de elegir NO crear una cuenta nueva
