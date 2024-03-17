@@ -1,4 +1,4 @@
-const FileSystem = require("./FileSystem.js")
+const FileSystem = require('./FileSystem.js')
 
 module.exports = class Account {
   constructor(name) {
@@ -49,11 +49,16 @@ module.exports = class Account {
   }
 
   async withdraw(amount) {
-    if (amount <= this.#balance) {
-      await FileSystem.write(this.filePath, this.#balance - amount)
-      this.#balance = this.#balance - amount
-    } else {
-      console.log("Insufficient fonds.")
-    }
+    if (amount > this.#balance) throw new Error()
+    await FileSystem.write(this.filePath, this.#balance - amount)
+    this.#balance = this.#balance - amount
+  }
+
+  async transfer(amount, accountName) {
+    if (amount > this.#balance) throw new Error()
+    await FileSystem.write(this.filePath, this.#balance - amount)
+    this.#balance = this.#balance - amount
+    const accountToTransfer = await Account.find(accountName)
+    await accountToTransfer.deposit(amount)
   }
 }

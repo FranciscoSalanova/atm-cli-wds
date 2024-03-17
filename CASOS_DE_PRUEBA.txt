@@ -7,3 +7,5 @@
 7. validar que la cuenta tenga fondos antes de realizar una extracción
 8. contestar que no hay fondos suficientes en caso de que el monto a extraer sea superior al monto disponible en la cuenta
 9. salir del programa en caso de elegir NO crear una cuenta nueva
+10. transferir desde la cuenta seleccionada a otra cuenta
+
