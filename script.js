@@ -9,14 +9,19 @@ async function main() {
       "Which account do you like to access?"
     )
 
-    const account = await Account.find(accountName)
-    if (account == null) account = await promptCreateAccount(accountName)
-    if (account != null) await promptTask(account)
+    let account = await Account.find(accountName)
+    if (!account) {
+      account = await promptCreateAccount(accountName)
+    }
+    if (account != null) {
+      await promptTask(account)
+    }
   } catch (error) {
     CommandLine.print("ERROR: please try again")
   }
 }
 
+/** Devuelve una nueva cuenta creada en caso de responder "yes". */
 async function promptCreateAccount(accountName) {
   const response = await CommandLine.ask(
     "That account does not exist, would you like to create it? (yes/no)"
@@ -27,6 +32,7 @@ async function promptCreateAccount(accountName) {
   }
 }
 
+/** Seleccionador para operar con la consola del ATM. */
 async function promptTask(account) {
   const response = await CommandLine.ask(
     "What would you like to do? (view/deposit/withdraw/transfer)"

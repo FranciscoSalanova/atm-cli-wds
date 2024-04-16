@@ -10,10 +10,6 @@ describe("#find", () => {
     const accountName = "Fred"
     expect(await Account.find(accountName)).toBeUndefined()
   })
-
-  test("en caso de no existir, crearla", async () => {
-    // todo
-  })
 })
 
 describe("#deposit", () => {
@@ -56,6 +52,36 @@ describe("#withdraw", () => {
       expect(account.balance).toBe(startingBalance)
       expect(spy).not.toHaveBeenCalled()
     })
+  })
+})
+
+describe("#transfer", () => {
+  test("transferir dinero", async () => {
+    // primero extraemos el dinero de la cuenta desde donde salen los fondos
+    const startingBalanceW = 20
+    const amount = 5
+    const accountW = await createAccount("Fran", startingBalanceW)
+    let spy = jest.spyOn(FileSystem, "write").mockReturnValue(Promise.resolve())
+
+    await accountW.withdraw(amount)
+    expect(accountW.balance).toBe(startingBalanceW - amount)
+    expect(spy).toHaveBeenCalledWith(
+      accountW.filePath,
+      startingBalanceW - amount
+    )
+    spy.mockRestore()
+
+    // luego depositamos los fondos en la cuenta receptora
+    const startingBalanceD = 0
+    const accountD = await createAccount("Fran", startingBalanceD)
+    spy = jest.spyOn(FileSystem, "write").mockReturnValue(Promise.resolve())
+
+    await accountD.deposit(amount)
+    expect(accountD.balance).toBe(startingBalanceD + amount)
+    expect(spy).toHaveBeenCalledWith(
+      accountD.filePath,
+      startingBalanceD + amount
+    )
   })
 })
 
