@@ -1,5 +1,3 @@
-1. consulta de cuenta existente
-2. consulta de cuenta inexistente
 3. creación de cuenta luego de consultar cuenta inexistente
 4. respuesta con menú de operaciones para una cuenta existente
 6. realizar una extracción en una cuenta existente
