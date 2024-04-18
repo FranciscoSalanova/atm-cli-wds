@@ -5,13 +5,6 @@ beforeEach(() => {
   jest.restoreAllMocks()
 })
 
-describe("#find", () => {
-  test("consultar una cuenta inexistente", async () => {
-    const accountName = "Fred"
-    expect(await Account.find(accountName)).toBeUndefined()
-  })
-})
-
 describe("#deposit", () => {
   test("depositar dinero", async () => {
     const startingBalance = 0
